@@ -1,1 +1,1 @@
-# P5 Procedural Lightning
+# P5-JS Procedural Lightning
