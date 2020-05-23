@@ -163,11 +163,12 @@ class LightningBolt
 		
 		if (bmaxBranchOffsetAsPercentageOfLength){
 			currentBranchOffset =  Vector(p0.x - p1.x, p0.y, - p1.y).mag() * (constrain(maxBranchOffset, 0.1, 100) / 100);
-        }
+        	}
 		
 		let chanceOfFork = constrain(chanceOfForkPercentage, 0, 100) / 100;
 		let branchOffsetReductionEachGeneration = constrain(branchOffsetReductionEachGenerationPercentage, 0.0, 100) / 100.0;
 		
+		// push initial lightning segment
 		segments.push(new LightningSegment(p0, p1, this.data.width || 1.0, [255,255,255]))
 		
 		
@@ -182,13 +183,11 @@ class LightningBolt
 				let midpoint = Vector((seg.p1.x + seg.p0.x) * 0.5, (seg.p1.y + seg.p0.y) * 0.5);
 				let normal   = Vector(seg.p1.x - seg.p0.x , seg.p1.y - seg.p0.y).getNormal().normalize();
 		
-        
 				midpoint.add( normal.mult(random(-currentBranchOffset, currentBranchOffset)));
 				
 				newGen.push( new LightningSegment(seg.p0, midpoint, seg.thickness));
 				newGen.push( new LightningSegment(midpoint, seg.p1, seg.thickness));
 
-		
 				if (random() > (1.0 - chanceOfFork)){
 				
                     
